@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+     <!-- <bean id="xmlPersonName" class="com.zm.spring.annotation.day02.Person"></bean> -->
+     
+     <!-- day03包扫描xml方式 -->
+     <!-- 包扫描、只要标注了@Controller、@Service、@Repository，@Component,@Configurable-->
+	 <!-- <context:component-scan base-package="day03ComponentScan" use-default-filters="false">
+	 </context:component-scan>
+	 <bean id="bookDao" class="day03ComponentScan.BookDao"></bean> -->
+	 
+	  <!-- day44国际化资源文件 -->
+	  <!-- <bean id="messageSource"
+	        class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <property name="basenames">
+	      <list>
+	        <value>test_en_US</value>
+	        <value>test_zh_CN</value>
+	      </list>
+	    </property>
+	  </bean> -->
+	  
+	<!-- day25Transaction.test中方法拦截器需要指定的绑定关系，目标方法所在类methodBean，拦截器类myMethodInterceptor -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>methodBean</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>myMethodInterceptor</value>
+			</list>
+		</property>
+	</bean> 
+	 
+	 
+</beans>
