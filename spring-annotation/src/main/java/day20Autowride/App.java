@@ -41,6 +41,19 @@ import org.springframework.context.annotation.Primary;
 		this.createUserDao = userDao;
 	 }
  * 
+ * Autowired 可以标记的地方是属性，方法，构造器，参数上
+ * 方式一：构造器参数获取：如果组件只有一个有参构造器，这个有参构造器的第一个bean从容器中获取，参数上的Autowired可以省略
+ * private car car;
+ * public color(car car) {
+ * this.car = car
+ * }
+ * 方式二：@bean标记的获取：
+ * @bean
+ * public color(car car) {
+ *  color color = new Color()；
+ *  color.setcar(car);
+ *  return color;
+ * }
  * @author yp-tc-m-7129
  *
  */
