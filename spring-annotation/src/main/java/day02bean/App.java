@@ -36,6 +36,14 @@ public class App {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(BeanConfig.class);
 		/*Dog dog = applicationContext.getBean(Dog.class);
 		dog.hello();*/
+		
+		/**
+		 * 当Student继承了Person，并且两个bean都在容器中的时候，person类型的bean也可以找到他的子类Student 所实例化的student对象
+		 */
+		String[] names = applicationContext.getBeanNamesForType(Person.class);
+		for (String name : names) {
+			System.out.println("name----"+name);
+		}
 		applicationContext.close();
 	}
 

@@ -23,16 +23,19 @@ import org.springframework.transaction.annotation.Transactional;
  *
  *2.2ProxyTransactionManagementConfiguration做了什么呢?
  * 他是一个配置类，给容器中注册各种组件，
- * 比如事务增强器 transactionAdvisor
- * 事务增强器需要的事务属性，也是一个bean transactionAttributeSource，属性比如 rollbanckfor等属性
- * 事务拦截器 transactionInterceptor
+ * 比如事务增强器 transactionAdvisor，增强器需要事务注解信息和事务拦截器
+ * 事务增强器需要的事务属性，也是一个bean transactionAttributeSource（事务注解信息），属性比如 rollbanckfor等属性
  * 
+ * 事务拦截器 transactionInterceptor（创建事务拦截器，添加了属性有:事务管理器，事务注解信息）
+ * 他实际上是一个MethodInterceptor接口的实现，他的主要实现方法看下面：
  * transactionInterceptor拦截器实现了MethodInterceptor接口，会在目标方法执行的时候执行拦截器链-invokeWithinTransaction
- *  2.2.1事务相关属性
+ *  2.2.1获取事务相关属性
  *  2.2.2 获取事务管理器-PlatformTransactionManager，如果你没有添加指定任何事务管理器，最终会从ioc容器中按照类型获取一个事务管理器
  *  this.beanFactory.getBean(PlatformTransactionManager.class);
- *  2.2.3 方法先执行目标方法，如果异常获取到事务管理器，利用事务管理器回滚这次操作（completeTransactionAfterThrowing）
- *  方法执行一切正常，commitTransactionAfterReturning，拿到事务管理器，提交事务
+ *  2.2.3 创建一个事务createTransactionIfNecessary，方法先执行目标方法，invocation.proceedWithInvocation();
+ *  如果捕获到异常，获取到事务管理器，利用事务管理器回滚这次操作（completeTransactionAfterThrowing）
+ *  如果方法执行正常，commitTransactionAfterReturning，拿到事务管理器，提交事务
+ *  
  */
 @EnableTransactionManagement
 public class App {
