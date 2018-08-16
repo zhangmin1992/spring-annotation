@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-     <!-- <bean id="xmlPersonName" class="com.zm.spring.annotation.day02.Person"></bean> -->
+     <bean id="xmlPersonName" class="day00ForXmlBean.Person"></bean>
      
      <!-- day03包扫描xml方式 -->
      <!-- 包扫描、只要标注了@Controller、@Service、@Repository，@Component,@Configurable-->
