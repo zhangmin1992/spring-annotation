@@ -18,7 +18,7 @@
 	 <bean id="bookDao" class="day03ComponentScan.BookDao"></bean> -->
 	 
 	  <!-- day44国际化资源文件 -->
-	  <!-- <bean id="messageSource"
+	  <bean id="messageSource"
 	        class="org.springframework.context.support.ResourceBundleMessageSource">
 	    <property name="basenames">
 	      <list>
@@ -26,7 +26,7 @@
 	        <value>test_zh_CN</value>
 	      </list>
 	    </property>
-	  </bean> -->
+	  </bean> 
 	  
 	<!-- day25Transaction.test中方法拦截器需要指定的绑定关系，目标方法所在类methodBean，拦截器类myMethodInterceptor -->
 	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
