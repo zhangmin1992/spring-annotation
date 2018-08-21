@@ -49,6 +49,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.13</version>
          </dependency>
+         
+         <!-- 自己写的启动器，测试redis启动器,试图引入jar包后直接使用redis工具类，redis注解 -->
+		 <dependency>
+		  <groupId>com.my.springboot</groupId>
+		  <artifactId>my-spring-boot-starter-redis-copy</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	
   </dependencies>
 </project>
