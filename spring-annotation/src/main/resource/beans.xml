@@ -43,7 +43,7 @@
 	 </bean> -->	
 	 
 	<!-- 基于xml方式加载指定的资源文件并显示属性方式一 -->
-	<!-- <bean id="propertyConfigurer"
+	<bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
          <property name="locations">   
          <list>  
@@ -54,5 +54,5 @@
 	</bean>
 	<bean id="propertiesBean" class="day11ForJidong.PropertiesBean">
 	 	<property name="redis" value="${my.chooice.redis}"></property>
-	</bean> -->	 
+	</bean>
 </beans>
