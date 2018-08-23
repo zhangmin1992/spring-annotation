@@ -22,6 +22,8 @@ public class App2 {
 		
 		System.out.println("---" + context.getBean(RedisProperties.class).getPort());
 		
+		System.out.println("准备插入redis数据");
+		
 		RedisToolUtils.set("qq", "qq");
 		
 		RedisToolUtils.set("day00ForProperties.TestServiceImpl2.testServiceMethod.[]", "hahaha");

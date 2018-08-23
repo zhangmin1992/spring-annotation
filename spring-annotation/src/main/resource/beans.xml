@@ -42,18 +42,17 @@
 		</property>
 	 </bean> -->	
 	 
+	<!-- 基于xml方式加载指定的资源文件并显示属性方式一 -->
 	<!-- <bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
          <property name="locations">   
          <list>  
-             <value>classpath:application.properties</value>    
+             <value>classpath*:application.properties</value>    
          </list>  
          </property>
+         <property name="ignoreUnresolvablePlaceholders" value="true" /> 
 	</bean>
-	<bean id="redisProperties" class="day00ForProperties.RedisProperties"></bean>
-	<bean id="redisPropertiesUse" class="day00ForProperties.RedisPropertiesUse">
-		<constructor-arg index="0" type="day00ForProperties.RedisProperties" ></constructor-arg>
-	</bean> -->
-	 
-	 
+	<bean id="propertiesBean" class="day11ForJidong.PropertiesBean">
+	 	<property name="redis" value="${my.chooice.redis}"></property>
+	</bean> -->	 
 </beans>
