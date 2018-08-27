@@ -11,8 +11,15 @@ import org.springframework.stereotype.Component;
  * @author yp-tc-m-7129
  *
  */
-@Conditional(MyConditional.class)
-@Component("redisProperties")
+/**
+ * 同一个bean名字根据环境变量决定加载哪个bean的方式一，需要些2个额外的类比较麻烦
+ * @author yp-tc-m-7129
+ *
+ */
+/*@Conditional(MyConditional.class)
+@Component("redisProperties")*/
+
+@ConditionalOnProperty(value="redis",havingValue="1",matchIfMissing=false)
 @PropertySource(value="classpath:application.properties")
 public class RedisProperties {
 

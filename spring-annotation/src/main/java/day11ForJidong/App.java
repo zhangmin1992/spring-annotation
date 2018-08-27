@@ -15,6 +15,12 @@ import org.springframework.core.env.Environment;
  * 
  * spring注解加载资源文件，把资源文件的值放到bean中要用comment不能用bean
  * spring使用@Component+@PropertySource+@Value可以获取属性值${my.name}的值，怎么使用@Bean+@PropertySource+@Value获取的确实${my.name}！！！
+ * 
+ * 
+	spring不可以直接用ConditionalOnProperty的原因的是spring不会再bean加载前就加载资源文件
+	1.实现了根据资源环境配置来决定加载哪个bean这里用了@@Conditional没有直接用ConditionalOnProperty，因为资源文件还没加载
+	2.xml方式加载资源文件并且将属性值赋值到bean中
+	3.@PropertySource+@value+@bean不可用！！！！！要用@@Component才可以得到属性值
  * @author yp-tc-m-7129
  *
  */
@@ -58,7 +64,6 @@ public class App {
 		System.out.println("-----"+beanProperties.getPort());
 		System.out.println("-----"+context.getBean(Environment.class).getProperty("redis"));
 		
-		System.out.println("-----"+context.getBean(PropertiesBean.class).getRedis());
 		context.close();
 		System.out.println("----end-----");
 	}

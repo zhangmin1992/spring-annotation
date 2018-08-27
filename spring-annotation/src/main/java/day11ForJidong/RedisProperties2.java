@@ -11,8 +11,9 @@ import org.springframework.stereotype.Component;
  * @author yp-tc-m-7129
  *
  */
-@Conditional(MyConditional2.class)
-@Component("redisProperties")
+/*@Conditional(MyConditional2.class)
+@Component("redisProperties")*/
+@ConditionalOnProperty(value="redis",havingValue="2",matchIfMissing=false)
 @PropertySource(value="classpath:application.properties")
 public class RedisProperties2 {
 
