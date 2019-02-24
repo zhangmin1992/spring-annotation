@@ -2,6 +2,8 @@ package day25Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class jdbcService {
@@ -21,9 +23,19 @@ public class jdbcService {
 	
 	public void writeBackOutFee() {
 		try {
-			jdbcOperator.testTransactional();
 		} catch (Exception e) {
 			System.out.println("通道费回写异常");
+		}
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED )
+	public void testRequiredTransactional() {
+		jdbcOperator.one();
+		jdbcOperator.two();
+		try {
+			jdbcOperator.three();
+		} catch (Exception e) {
+			System.out.println("异常被捕获");
 		}
 	}
 }

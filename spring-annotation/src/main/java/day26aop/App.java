@@ -292,7 +292,6 @@ public class App {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Myconfig.class);
 		MethodBean MethodBean = context.getBean(MethodBean.class);
-//		MethodBean.getNum(2);
-		MethodBean.getMyNum();
+		MethodBean.getNum(2);
 	}
 }

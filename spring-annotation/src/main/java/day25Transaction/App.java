@@ -42,6 +42,11 @@ public class App {
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("day25Transaction");
+		jdbcService jdbcService = context.getBean(jdbcService.class);
+		JdbcOperator jdbcOperator = context.getBean(JdbcOperator.class);
+		jdbcService.testRequiredTransactional();
+//		jdbcService.testRequiredTransactional();
+		
 //		JdbcOperator jdbcOperator = context.getBean(JdbcOperator.class);
 //		String dateString = jdbcOperator.searchUserName(3);
 //		System.out.println(dateString);
@@ -54,8 +59,8 @@ public class App {
 //			System.out.println("发生未知异常！！！！！");
 //		}
 		
-		jdbcService jdbcService = context.getBean(jdbcService.class);
-		jdbcService.processDeamonWriteBackOutFee();
+//		jdbcService jdbcService = context.getBean(jdbcService.class);
+//		jdbcService.processDeamonWriteBackOutFee();
 		
 	}
 }

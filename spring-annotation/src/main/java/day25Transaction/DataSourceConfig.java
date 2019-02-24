@@ -33,9 +33,9 @@ public class DataSourceConfig {
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource dataSource=new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://10.151.11.3:3306/payplus_test?useUnicode=true&characterEncoding=utf-8");
-        dataSource.setUsername("ppl");
-        dataSource.setPassword("ppl123456");
+        dataSource.setUrl("jdbc:mysql://rm-2ze707l6b0440gg1pxo.mysql.rds.aliyuncs.com:3306/mercury_test_01?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull");
+        dataSource.setUsername("mercury_test_01");
+        dataSource.setPassword("Qamo16mRYqnA4GTY");
         return dataSource;
 	}
 	

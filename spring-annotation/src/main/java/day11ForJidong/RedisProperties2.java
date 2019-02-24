@@ -1,10 +1,7 @@
 package day11ForJidong;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 /**
  * @Bean(name="redisProperties2") 结合@PropertySource不可用,一定要用@Component！！！
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 /*@Conditional(MyConditional2.class)
 @Component("redisProperties")*/
-@ConditionalOnProperty(value="redis",havingValue="2",matchIfMissing=false)
+//@ConditionalOnProperty(value="redis",havingValue="2",matchIfMissing=false)
 @PropertySource(value="classpath:application.properties")
 public class RedisProperties2 {
 
