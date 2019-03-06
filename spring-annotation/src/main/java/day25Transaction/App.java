@@ -44,8 +44,19 @@ public class App {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("day25Transaction");
 		jdbcService jdbcService = context.getBean(jdbcService.class);
 		JdbcOperator jdbcOperator = context.getBean(JdbcOperator.class);
-		jdbcService.testRequiredTransactional();
-//		jdbcService.testRequiredTransactional();
+		/**
+		 * 测试事务的传播属性
+		 */
+		//jdbcService.testRequiredTransactional();
+		/**
+		 * 测试本地调用，
+		 */
+		jdbcService.testTransactional();
+		/**
+		 * 测试默认回话的隔离级别，muysql默认隔离级别是读已提交，别的回话是看不到你刚刚插入的数据11的
+		 * 但是本回话是可以获取到数据11的
+		 */
+//		jdbcService.testInsertAndGet();
 		
 //		JdbcOperator jdbcOperator = context.getBean(JdbcOperator.class);
 //		String dateString = jdbcOperator.searchUserName(3);

@@ -33,18 +33,21 @@ public class JdbcOperator {
 		return  this.jdbcTemplate.queryForObject(sql, String.class, id);
 	}
 	
-	@Transactional(propagation=Propagation.REQUIRED)
+//	@Transactional(propagation=Propagation.REQUIRED)
 	public void one() {
 		String sql = "insert into acc_legal_holidays values (?,?)";
 		jdbcTemplate.update(sql,"11","2018-09-09");
 	}
 	
-	@Transactional(propagation=Propagation.NESTED)
+//	@Transactional(propagation=Propagation.NESTED)
 	public void two() {
 		String sql = "insert into acc_legal_holidays values (?,?)";
 		jdbcTemplate.update(sql,"22","2018-09-09");
 	}
-	@Transactional(propagation=Propagation.NESTED)
+	
+//	@Transactional(propagation=Propagation.REQUIRED)
+//	@Transactional(propagation=Propagation.NESTED)
+//	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void three() {
 		String sql = "insert into acc_legal_holidays values (?,?)";
 		jdbcTemplate.update(sql,"33","2018-09-09");
