@@ -13,7 +13,6 @@ public class MyMethodInterceptor implements MethodInterceptor {
 	 * @return
 	 * @throws Throwable
 	 */
-	@Override
 	public Object invoke(MethodInvocation mi) throws Throwable {
 		 if(mi.getMethod().isAnnotationPresent(MyLoginRequired.class)) {
 			 System.out.println("我被拦截了，打印一行日志");

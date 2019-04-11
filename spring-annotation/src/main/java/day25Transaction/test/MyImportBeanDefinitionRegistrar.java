@@ -13,7 +13,6 @@ import org.springframework.core.type.AnnotationMetadata;
 //不需要@compoent注入，在配置类中import
 public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
-	@Override
 	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,BeanDefinitionRegistry registry) {
 		//得到源数据的注解，就是MyImportBeanDefinitionRegistrar被import的地方上的注解
 		Set<String> annoTypes = importingClassMetadata.getAnnotationTypes();
@@ -29,5 +28,4 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
 			registry.registerBeanDefinition("mydogher", beanDefinition);
 		}
 	}
-
 }

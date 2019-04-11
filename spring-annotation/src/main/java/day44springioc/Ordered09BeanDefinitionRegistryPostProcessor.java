@@ -12,19 +12,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class Ordered09BeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor,Ordered {
 
-	@Override
 	public void postProcessBeanFactory(
 			ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		System.out.println("----Ordered09BeanDefinitionRegistryPostProcessor --- postProcessBeanFactory 回调");
 	}
 
-	@Override
 	//添加定义bean
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		System.out.println("----999999999--Ordered09BeanDefinitionRegistryPostProcessor--添加bean了");
 	}
 
-	@Override
 	public int getOrder() {
 		return 9;
 	}

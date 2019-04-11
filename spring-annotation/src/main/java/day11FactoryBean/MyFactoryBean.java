@@ -4,12 +4,10 @@ import org.springframework.beans.factory.FactoryBean;
 
 public class MyFactoryBean implements FactoryBean<Dog> {
 
-	@Override
 	public Dog getObject() throws Exception {
 		return new Dog();
 	}
 
-	@Override
 	public Class<?> getObjectType() {
 		return Dog.class;
 	}
@@ -17,7 +15,6 @@ public class MyFactoryBean implements FactoryBean<Dog> {
 	/**
 	 * 是单例还是多例
 	 */
-	@Override
 	public boolean isSingleton() {
 		return true;
 	}

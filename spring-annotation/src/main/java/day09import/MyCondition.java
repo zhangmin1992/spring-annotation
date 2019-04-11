@@ -20,7 +20,7 @@ public class MyCondition implements Condition{
 	 * ConditionContext 表示应用上下文
 	 * AnnotatedTypeMetadata 注释信息
 	 */
-	@Override
+	
 	public boolean matches(ConditionContext context,AnnotatedTypeMetadata metadata) {
 		BeanDefinitionRegistry beanDefinitionRegistry = context.getRegistry();
 		boolean result = beanDefinitionRegistry.containsBeanDefinition("day09import.Dog");

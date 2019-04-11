@@ -10,13 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-	@Override
 	public void postProcessBeanFactory(
 			ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		System.out.println("----MyBeanDefinitionRegistryPostProcessor  postProcessBeanFactory 回调");
 	}
 
-	@Override
 	//添加定义bean
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		System.out.println("-----MyBeanDefinitionRegistryPostProcessor --- 添加bean了---");

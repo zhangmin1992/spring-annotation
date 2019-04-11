@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanFactoryProcess implements BeanFactoryPostProcessor {
 
-	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		System.out.println("--------------postProcessBeanFactory---------------");
 		System.out.println("当前容器中有几个bean" + beanFactory.getBeanDefinitionCount());

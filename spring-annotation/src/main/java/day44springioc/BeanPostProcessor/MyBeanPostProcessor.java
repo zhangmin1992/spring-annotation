@@ -8,21 +8,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanPostProcessor implements BeanPostProcessor,Ordered {
 
-	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName)
 			throws BeansException {
 		System.out.println(beanName+"************** MyBeanPostProcessor  postProcessBeforeInitialization **************");
 		return bean;
 	}
 
-	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 			throws BeansException {
 		System.out.println(beanName+ "************** MyBeanPostProcessor  postProcessAfterInitialization **************");
 		return bean;
 	}
 
-	@Override
 	public int getOrder() {
 		return 1;
 	}

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyConditional implements Condition{
 
-	@Override
 	public boolean matches(ConditionContext context,AnnotatedTypeMetadata metadata) {
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("profile.properties");
 		Properties  prop = new Properties();

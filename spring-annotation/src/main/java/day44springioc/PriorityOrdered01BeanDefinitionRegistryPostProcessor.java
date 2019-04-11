@@ -11,19 +11,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class PriorityOrdered01BeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor,PriorityOrdered {
 
-	@Override
 	public void postProcessBeanFactory(
 			ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		System.out.println("----PriorityOrdered01BeanDefinitionRegistryPostProcessor  postProcessBeanFactory 回调");
 	}
 
-	@Override
 	//添加定义bean
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		System.out.println("---PriorityOrdered01BeanDefinitionRegistryPostProcessor-111111111----添加bean了");
 	}
 
-	@Override
 	public int getOrder() {
 		return 1;
 	}

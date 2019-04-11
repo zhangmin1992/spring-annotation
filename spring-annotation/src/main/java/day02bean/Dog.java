@@ -30,12 +30,10 @@ import org.springframework.context.ApplicationContextAware;
  */
 public class Dog implements InitializingBean,DisposableBean,BeanNameAware,BeanFactoryAware,ApplicationContextAware {
 	
-	@Override
 	public void destroy() throws Exception {
 		System.out.println("----DisposableBean -destroy-------");
 	}
 
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		System.out.println("---InitializingBean--afterPropertiesSet-------");
 	}
@@ -66,17 +64,14 @@ public class Dog implements InitializingBean,DisposableBean,BeanNameAware,BeanFa
 		System.out.println("------Dog PreDestroy-----");
 	}
 
-	@Override
 	public void setBeanName(String name) {
 		System.out.println("-----BeanNameAware----");
 	}
 
-	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		System.out.println("----BeanFactoryAware---");
 	}
 
-	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
 		System.out.println("------ApplicationContextAware---");

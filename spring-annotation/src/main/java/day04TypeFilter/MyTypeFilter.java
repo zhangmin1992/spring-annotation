@@ -22,7 +22,6 @@ public class MyTypeFilter implements TypeFilter {
 	 * MetadataReader读取到的当前正在扫描的类的信息
 	 * MetadataReaderFactory 可以获取其他任何类的信息
 	 */
-	@Override
 	public boolean match(MetadataReader metadataReader, MetadataReaderFactory factory)
 			throws IOException {
 		//获取当前类注解的信息
