@@ -14,6 +14,6 @@ public class App {
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Myconfig.class);
-		//context.getBean(MyAware.class);
+		context.getBean(MyAware.class);
 	}
 }

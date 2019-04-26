@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day47ForMybatisMapperAgent.AccLegalTableMapper">
+  <resultMap id="BaseResultMap" type="day47ForMybatisMapperAgent.AccLegalTable">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="holiday_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="activity_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, holiday_date, activity_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acc_legal_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from acc_legal_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="day47ForMybatisMapperAgent.AccLegalTable">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into acc_legal_table (id, holiday_date, activity_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{holidayDate,jdbcType=DATE}, #{activityName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="day47ForMybatisMapperAgent.AccLegalTable">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into acc_legal_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="holidayDate != null">
+        holiday_date,
+      </if>
+      <if test="activityName != null">
+        activity_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="holidayDate != null">
+        #{holidayDate,jdbcType=DATE},
+      </if>
+      <if test="activityName != null">
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="day47ForMybatisMapperAgent.AccLegalTable">
+    update acc_legal_table
+    <set>
+      <if test="holidayDate != null">
+        holiday_date = #{holidayDate,jdbcType=DATE},
+      </if>
+      <if test="activityName != null">
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="day47ForMybatisMapperAgent.AccLegalTable">
+    update acc_legal_table
+    set holiday_date = #{holidayDate,jdbcType=DATE},
+      activity_name = #{activityName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

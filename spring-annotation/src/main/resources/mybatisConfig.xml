@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 引入资源文件 -->
+	<properties resource="log4j.properties"></properties>
+	
+	<!-- settings 中的 logimpl 属性配置指定使用 LOG4J 输出日志  -->
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>  
+		<!-- 加上这句话，实现自动将数据库查出来的下划线的字段转化成驼峰形式，可以避免数据库新增字段后，实体新增后，还需要修改xml文件的查询，删除修改等东西 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 加上这几话，可以实现主键自动返回 -->
+		<setting name="useGeneratedKeys" value="true" />
+	</settings>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- mybatis配置文件数据库链接部分 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://rm-2ze707l6b0440gg1pxo.mysql.rds.aliyuncs.com:3306/mercury_test_01" />
+				<property name="username" value="heimdallr" />
+				<property name="password" value="7HGDeJLnH8a3" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 映射文件地址，需要一个个列举比较麻烦 -->
+	<mappers>
+		<mapper resource="mapper/AccTableMapper.xml" />
+		<mapper resource="mapper/AccLegalTableMapper.xml" />
+	</mappers>
+	<!-- 映射文件地址,企图这样，发现不可以-->
+	<!-- <mappers>
+		<package name="day46ForMybatisLog4jPrintSql.dao"/>
+	</mappers> -->
+</configuration>
