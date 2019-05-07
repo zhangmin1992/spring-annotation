@@ -8,6 +8,18 @@
       <arg column="activity_name" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
+  
+  <!-- <resultMap id="groupByMap" type="day45ForMyvatisSource.entity.AccTableTemp">
+  	<result column="time" jdbcType="VARCHAR" property="time" />
+  	<result column="holiday_date" jdbcType="VARCHAR" property="date" />
+  	<result column="activity_name" jdbcType="VARCHAR" property="name" />
+  </resultMap> -->
+  
+  <resultMap id="groupByMap" type="java.util.Map">
+  	<result column="holiday_date" jdbcType="VARCHAR" property="date" />
+  	<result column="activity_name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     id, holiday_date, activity_name
   </sql>
@@ -102,5 +114,17 @@
      )
     </foreach>  
   </insert>
+  
+  <select id="groupByAndReturnMap" resultMap="groupByMap">
+  	SELECT mm.holiday_date,mm.activity_name FROM acc_table2 mm
+	WHERE 1=1
+	group by mm.activity_name
+  </select>
+  
+ <!--  <select id="groupByAndReturnMap2" resultType="java.util.Map">
+  	SELECT mm.holiday_date,mm.activity_name FROM acc_table2 mm
+	WHERE 1=1
+	group by mm.activity_name
+  </select> -->
   
 </mapper>

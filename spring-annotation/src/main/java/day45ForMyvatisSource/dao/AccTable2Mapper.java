@@ -1,8 +1,11 @@
 package day45ForMyvatisSource.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -44,5 +47,14 @@ public interface AccTable2Mapper {
      * 1.dao 层不能有@param注解
      */
     int batchInsert2(ArrayList<AccTable2> lists);
+    
+    List<Map<String,String>> groupByAndReturnMap();
+    
+
+    @MapKey("holiday_date")
+    @Select("SELECT mm.holiday_date,mm.activity_name FROM acc_table2 mm\n" + 
+    		"	WHERE 1=1\n" + 
+    		"	group by mm.activity_name")
+    Map<Date,Map<Date,String>> groupByAndReturnMap2();
 
 }

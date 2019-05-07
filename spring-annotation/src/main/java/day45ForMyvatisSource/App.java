@@ -1,16 +1,20 @@
 package day45ForMyvatisSource;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSONObject;
 
 import day45ForMyvatisSource.dao.AccTable2Mapper;
-import day45ForMyvatisSource.entity.AccTable2;
+import day45ForMyvatisSource.entity.AccTableTemp;
 import day45ForMyvatisSource.service.impl.AccTableServiceImpl;
 
 /**
@@ -38,13 +42,26 @@ import day45ForMyvatisSource.service.impl.AccTableServiceImpl;
  *  parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >   
  *  <foreach collection="list" item="acc" separator=",">
  *  
+ *  功能点5：mapper中直接返回map，
+ *  返回值是Map<Date,Map<Date,String>>，需要用@MapKey("holiday_date")注解指定谁是额外的那个key
+ *  <select id="groupByAndReturnMap2" resultType="java.util.Map">
+  	SELECT mm.holiday_date,mm.activity_name FROM acc_table2 mm
+	WHERE 1=1
+	group by mm.activity_name
+  </select>
+ *  同时需要map中获取date的key的时候，new date()是当前时间戳，是获取不到的，需要转化为指定日期格式的去查询
+ *  DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Date dd1 =  sdf.parse("2019-05-07");
+ *  
+ *  
+ *  
 	* @Description: TODO(这里用一句话描述这个类的作用) 
 	* @author zhangmin 
 	* @date Apr 19, 2019 3:16:59 PM
  */
 public class App {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		//1.加载spring配置文件
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		System.out.println(JSONObject.toJSONString(context.getBeanDefinitionNames()));
@@ -71,12 +88,12 @@ public class App {
 		//System.out.println(JSONObject.toJSONString(list));
 		
 		//7.foreach标签的使用-集合-同一个xml
-		ArrayList<String> tempArrayList = new ArrayList<String>();
-		tempArrayList.add("10");
-		tempArrayList.add("71");
-		tempArrayList.add("77");
-		List<AccTable2> list2 = accTable2Mapper.selectByIds(tempArrayList);
-		System.out.println(JSONObject.toJSONString(list2));
+//		ArrayList<String> tempArrayList = new ArrayList<String>();
+//		tempArrayList.add("10");
+//		tempArrayList.add("71");
+//		tempArrayList.add("77");
+//		List<AccTable2> list2 = accTable2Mapper.selectByIds(tempArrayList);
+//		System.out.println(JSONObject.toJSONString(list2));
 		
 		//8批量插入
 //		ArrayList<AccTable2> list3 = new ArrayList<AccTable2>();
@@ -86,12 +103,22 @@ public class App {
 //		System.out.println("result="+ result);
 		
 		//9.批量插入返回主键
-		ArrayList<AccTable2> list3 = new ArrayList<AccTable2>();
-		list3.add(new AccTable2(new Date(), "113"));
-		list3.add(new AccTable2(new Date(), "114"));
-		int result = accTable2Mapper.batchInsert2(list3);
-		System.out.println("result="+ result);
-		System.out.println("批量插入后返回主键列表是 " + JSONObject.toJSONString(list3));
+//		ArrayList<AccTable2> list3 = new ArrayList<AccTable2>();
+//		list3.add(new AccTable2(new Date(), "113"));
+//		list3.add(new AccTable2(new Date(), "114"));
+//		int result = accTable2Mapper.batchInsert2(list3);
+//		System.out.println("result="+ result);
+//		System.out.println("批量插入后返回主键列表是 " + JSONObject.toJSONString(list3));
+		
+		//10.分组然后返回map
+//		List<Map<String,String>> map = accTable2Mapper.groupByAndReturnMap();
+//		System.out.println("是 " + JSONObject.toJSONString(map));
+		Map<Date,Map<Date,String>> map = accTable2Mapper.groupByAndReturnMap2();
+		System.out.println("是 " + JSONObject.toJSONString(map));
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dd1 =  sdf.parse("2019-05-07");
+		System.out.println(dd1.getTime());
+		System.out.println(map.get(dd1).get("activity_name"));
 		context.close();
 	}
 }
