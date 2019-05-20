@@ -1,19 +1,10 @@
 package day45ForMyvatisSource.entity;
 
 public class AccTableTemp {
-    private String time;
 
     private String date;
 
     private String Name;
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
 
 	public String getDate() {
 		return date;

@@ -2,6 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+	<!-- 标签的顺序必须按照：(properties?,settings?,typeAliases?,typeHandlers?,
+	objectFactory?,objectWrapperFactory?,
+	reflectorFactory?,plugins?,
+	environments?,databaseIdProvider?,mappers?)"。 -->
 	<!-- 引入资源文件 -->
 	<properties resource="log4j.properties"></properties>
 	
@@ -12,7 +16,17 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<!-- 加上这几话，可以实现主键自动返回 -->
 		<setting name="useGeneratedKeys" value="true" />
+		
+		<!-- 全局性设置懒加载。如果设为‘false'，则所有相关联的都会被初始化加载。 -->
+	    <setting name="lazyLoadingEnabled" value="true"/>
+	    <!-- 当设置为‘true'的时候，懒加载的对象可能被任何懒属性全部加载。否则，每个属性都按需加载。 -->
+	    <setting name="aggressiveLazyLoading" value="false"/>
 	</settings>
+	
+	<!-- 枚举类型的处理器 -->
+	<typeHandlers>
+		<typeHandler javaType="day49ForMybatisDiscriminator.EnabledEnum" handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+	</typeHandlers>
 	
 	<environments default="development">
 		<environment id="development">
@@ -30,10 +44,15 @@
 	<!-- 映射文件地址，需要一个个列举比较麻烦 -->
 	<mappers>
 		<mapper resource="mapper/AccTableMapper.xml" />
+		<mapper resource="mapper/AccTable2Mapper.xml" />
 		<mapper resource="mapper/AccLegalTableMapper.xml" />
+		<mapper resource="mapper/AccOrdersMapper.xml" />
+		<mapper resource="mapper/AccUserMapper.xml" />
 	</mappers>
 	<!-- 映射文件地址,企图这样，发现不可以-->
 	<!-- <mappers>
 		<package name="day46ForMybatisLog4jPrintSql.dao"/>
 	</mappers> -->
+	
+	
 </configuration>

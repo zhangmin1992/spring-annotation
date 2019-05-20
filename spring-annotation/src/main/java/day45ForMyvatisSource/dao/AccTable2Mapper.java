@@ -8,8 +8,12 @@ import java.util.Map;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 
 import day45ForMyvatisSource.entity.AccTable2;
+import day45ForMyvatisSource.entity.AccTableTemp;
+import day46ForMybatisLog4jPrintSql.dao.AccTableMapperProvider;
 
 public interface AccTable2Mapper {
     int deleteByPrimaryKey(Integer id);
@@ -30,7 +34,7 @@ public interface AccTable2Mapper {
     /**
      * String[] 类型的
      */
-    //List<AccTable2> selectByIds(@Param("ids") String[] ids);
+    List<AccTable2> selectByIds(@Param("ids") String[] ids);
     
     /**
      * ArrayList 类型的
@@ -56,5 +60,13 @@ public interface AccTable2Mapper {
     		"	WHERE 1=1\n" + 
     		"	group by mm.activity_name")
     Map<Date,Map<Date,String>> groupByAndReturnMap2();
+    
+    @MapKey("date")
+    @Select("SELECT mm.holiday_date as date,mm.activity_name as name FROM acc_table2 mm\n" + 
+    		"	WHERE 1=1\n" + 
+    		"	group by mm.activity_name")
+    Map<Date,AccTableTemp> groupByAndReturnMap3();
+    
+    int batchUpdateByPrimaryKey(@Param("lists") List<AccTable2> lists);
 
 }

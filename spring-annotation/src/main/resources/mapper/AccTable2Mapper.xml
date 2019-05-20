@@ -104,7 +104,8 @@
     </foreach>  
   </insert>
   
-  <insert id="batchInsert2" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >   
+  <insert id="batchInsert2" parameterType="java.util.List" 
+  useGeneratedKeys="true" keyProperty="id" >   
     insert into acc_table2 (id, holiday_date, activity_name
       )
     values 
@@ -126,5 +127,18 @@
 	WHERE 1=1
 	group by mm.activity_name
   </select> -->
+  
+  <update id="batchUpdateByPrimaryKey" parameterType="java.util.List">
+  	 update acc_table2 
+     set  activity_name =
+    <foreach collection="lists" item="acc"
+             separator=" " open="case" close="end">
+     when id = #{acc.id} then #{acc.activityName} 
+    </foreach>
+    where id in
+    <foreach collection="lists" index="acc" separator="," open="(" close=")">
+        #{acc.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
   
 </mapper>

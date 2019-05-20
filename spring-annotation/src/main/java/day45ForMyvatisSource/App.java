@@ -1,20 +1,15 @@
 package day45ForMyvatisSource;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.annotations.MapKey;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSONObject;
 
 import day45ForMyvatisSource.dao.AccTable2Mapper;
-import day45ForMyvatisSource.entity.AccTableTemp;
+import day45ForMyvatisSource.entity.AccTable2;
 import day45ForMyvatisSource.service.impl.AccTableServiceImpl;
 
 /**
@@ -113,12 +108,26 @@ public class App {
 		//10.分组然后返回map
 //		List<Map<String,String>> map = accTable2Mapper.groupByAndReturnMap();
 //		System.out.println("是 " + JSONObject.toJSONString(map));
-		Map<Date,Map<Date,String>> map = accTable2Mapper.groupByAndReturnMap2();
-		System.out.println("是 " + JSONObject.toJSONString(map));
-		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dd1 =  sdf.parse("2019-05-07");
-		System.out.println(dd1.getTime());
-		System.out.println(map.get(dd1).get("activity_name"));
+		//方式一
+//		Map<Date,Map<Date,String>> map = accTable2Mapper.groupByAndReturnMap2();
+//		System.out.println("是 " + JSONObject.toJSONString(map));
+//		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date dd1 =  sdf.parse("2019-05-07");
+//		System.out.println(dd1.getTime());
+//		System.out.println(map.get(dd1).get("activity_name"));
+		//方式二
+//		Map<Date,AccTableTemp> map = accTable2Mapper.groupByAndReturnMap3();
+//		System.out.println("是 " + JSONObject.toJSONString(map));
+//		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date dd1 =  sdf.parse("2019-05-07");
+//		System.out.println(dd1.getTime());
+//		System.out.println(map.get(dd1).getName());
+		
+		List<AccTable2> lists = accTable2Mapper.selectByIds(new String[] {"10","71","77"});
+		lists.get(0).setActivityName("112221name");
+		lists.get(1).setActivityName("222222name");
+		lists.get(2).setActivityName("3222233name");
+		accTable2Mapper.batchUpdateByPrimaryKey(lists);
 		context.close();
 	}
 }

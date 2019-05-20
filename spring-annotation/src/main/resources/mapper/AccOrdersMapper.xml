@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day48ForMybatisLayzyLoad.AccOrdersMapper">
+  <resultMap id="BaseResultMap" type="day48ForMybatisLayzyLoad.AccOrders">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, order_name, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acc_orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!-- 懒加载部分 -->
+  <sql id="mylist">
+    id, order_name, user_id
+  </sql>
+  <resultMap id="getOrderMap" type="day48ForMybatisLayzyLoad.AccOrders">
+     <id column="id" property="id"/>
+     <result column="order_name" property="orderName"/>
+     <association 
+     fetchType="lazy" 
+     property="accUser" 
+     javaType="day48ForMybatisLayzyLoad.AccUser"  
+     column="user_id" 
+     select="day48ForMybatisLayzyLoad.AccUserMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <select id="getOrderByPrimaryKey" parameterType="java.lang.Integer" resultMap="getOrderMap">
+    select 
+    <include refid="mylist" />
+    from acc_orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+   <!-- 欠套查询部分写法一：没有使用懒加载 -->
+   <resultMap id="getOrderMap2" type="day48ForMybatisLayzyLoad.AccOrders">
+     <id column="id" property="id"/>
+     <result column="order_name" property="orderName"/>
+     <collection property="accUser" 
+     resultMap="day48ForMybatisLayzyLoad.AccUserMapper.BaseResultMap"/>
+  </resultMap>
+  <select id="getOrderByPrimaryKey2" parameterType="java.lang.Integer"
+   resultMap="getOrderMap2">
+    select 
+    mm.*,nn.*
+    from acc_orders mm
+    LEFT join acc_user nn on mm.user_id=nn.id
+    where mm.id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 欠套查询部分写法二-使用懒加载一个字段关联 -->
+  <resultMap id="getOrderMap3" type="day48ForMybatisLayzyLoad.AccOrders">
+     <id column="id" property="id"/>
+     <result column="order_name" property="orderName"/>
+     <collection
+     property="accUser" 
+     ofType="day48ForMybatisLayzyLoad.AccUser"
+     column="user_id" 
+     select="day48ForMybatisLayzyLoad.AccUserMapper.selectByPrimaryKey"/>
+  </resultMap>
+  <select id="getOrderByPrimaryKey3" parameterType="java.lang.Integer"
+   resultMap="getOrderMap3">
+    select 
+    *
+    from acc_orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 欠套查询部分写法二-使用懒加载一个字段关联 -->
+  <!-- column="{id=user_id,name=order_name}"  中表示
+  id，name表示 调用的select的查询的参数值
+  user_id，order_name 表示查询的语句getOrderByPrimaryKey4 中的返回的字段值
+   -->
+  <resultMap id="getOrderMap4" type="day48ForMybatisLayzyLoad.AccOrders">
+     <id column="id" property="id"/>
+     <result column="order_name" property="orderName"/>
+     <collection
+     property="accUser" 
+     ofType="day48ForMybatisLayzyLoad.AccUser"
+     column="{id=user_id,name=order_name}" 
+     select="day48ForMybatisLayzyLoad.AccUserMapper.selectByName"/>
+  </resultMap>
+  <select id="getOrderByPrimaryKey4" parameterType="java.lang.Integer"
+   resultMap="getOrderMap4">
+    select 
+    *
+    from acc_orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from acc_orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="day48ForMybatisLayzyLoad.AccOrders">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into acc_orders (id, order_name, user_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="day48ForMybatisLayzyLoad.AccOrders">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into acc_orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="orderName != null">
+        order_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="day48ForMybatisLayzyLoad.AccOrders">
+    update acc_orders
+    <set>
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="day48ForMybatisLayzyLoad.AccOrders">
+    update acc_orders
+    set order_name = #{orderName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

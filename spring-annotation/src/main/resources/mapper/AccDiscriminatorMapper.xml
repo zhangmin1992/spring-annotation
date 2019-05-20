@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day49ForMybatisDiscriminator.AccDiscriminatorMapper">
+  
+  <resultMap id="BaseResultMap" type="day49ForMybatisDiscriminator.AccDiscriminator">
+      <id column="id" property="id" />
+      <result column="name" property="name"/>
+      <result column="type" property="type"/>
+      <!-- <result column="person_type" property="personType"/> -->
+      
+      <!-- mybatis 鉴别器 -->
+      <discriminator javaType="int" column="person_type">
+			<case value="0" resultMap="manResult"/>
+			<case value="1" resultMap="womanResult"/>
+	 </discriminator>
+   </resultMap>
+  
+   <resultMap id="manResult" type="day49ForMybatisDiscriminator.AccDiscriminatorMan">
+		<result property="prostate" column="prostate" />
+	</resultMap>
+	<resultMap id="womanResult" type="day49ForMybatisDiscriminator.AccDiscriminatorWoman">
+		<result property="womb" column="womb"/>
+	</resultMap>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    *
+    from acc_discriminator
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+</mapper>
