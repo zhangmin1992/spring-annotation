@@ -8,6 +8,8 @@ public class AccTable2 {
     private Date holidayDate;
 
     private String activityName;
+    
+    private String activityName2;
 
     public AccTable2(Date holidayDate, String activityName) {
         this.holidayDate = holidayDate;
@@ -47,5 +49,13 @@ public class AccTable2 {
     public void setActivityName(String activityName) {
         this.activityName = activityName;
     }
+
+	public String getActivityName2() {
+		return activityName2;
+	}
+
+	public void setActivityName2(String activityName2) {
+		this.activityName2 = activityName2;
+	}
     
 }

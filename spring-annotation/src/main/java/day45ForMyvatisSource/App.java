@@ -123,11 +123,16 @@ public class App {
 //		System.out.println(dd1.getTime());
 //		System.out.println(map.get(dd1).getName());
 		
-		List<AccTable2> lists = accTable2Mapper.selectByIds(new String[] {"10","71","77"});
-		lists.get(0).setActivityName("112221name");
-		lists.get(1).setActivityName("222222name");
-		lists.get(2).setActivityName("3222233name");
-		accTable2Mapper.batchUpdateByPrimaryKey(lists);
+//		List<AccTable2> lists = accTable2Mapper.selectByIds(new String[] {"10","71","77"});
+//		lists.get(0).setActivityName("112221name");
+//		lists.get(1).setActivityName("222222name");
+//		lists.get(2).setActivityName("3222233name");
+//		accTable2Mapper.batchUpdateByPrimaryKey(lists);
+		
+		AccTable2 accTable2 = accTable2Mapper.selectByChar("cccc");
+		System.out.println(JSONObject.toJSONString(accTable2));
+		System.out.println(accTable2.getActivityName2().equals("cccc"));
+		System.out.println(accTable2.getActivityName2().trim().equals("cccc"));
 		context.close();
 	}
 }

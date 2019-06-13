@@ -68,5 +68,8 @@ public interface AccTable2Mapper {
     Map<Date,AccTableTemp> groupByAndReturnMap3();
     
     int batchUpdateByPrimaryKey(@Param("lists") List<AccTable2> lists);
+    
+    @Select("select * from acc_table2 where activity_name2 = #{name}")
+    AccTable2 selectByChar(String name);
 
 }

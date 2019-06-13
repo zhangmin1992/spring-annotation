@@ -51,7 +51,7 @@ public class App {
 		/**
 		 * 测试本地调用，
 		 */
-		jdbcService.testTransactional();
+		//jdbcService.testTransactional();
 		/**
 		 * 测试默认回话的隔离级别，muysql默认隔离级别是读已提交，别的回话是看不到你刚刚插入的数据11的
 		 * 但是本回话是可以获取到数据11的
@@ -72,6 +72,8 @@ public class App {
 		
 //		jdbcService jdbcService = context.getBean(jdbcService.class);
 //		jdbcService.processDeamonWriteBackOutFee();
+		
+		jdbcService.one();
 		
 	}
 }
