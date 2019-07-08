@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day50ForMybatisCache.AccEncacheMapper">
+  
+  <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+  <cache type="org.mybatis.caches.redis.RedisCache "/>
+  
+  <resultMap id="BaseResultMap" type="day50ForMybatisCache.AccEncache">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="holiday_date" javaType="java.util.Date" jdbcType="DATE" />
+       <arg column="activity_name" javaType="java.lang.String" jdbcType="VARBINARY" />
+    </constructor>
+  </resultMap>
+   
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    *
+    from acc_encache
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    *
+    from acc_encache
+    where 1=1
+  </select>
+</mapper>

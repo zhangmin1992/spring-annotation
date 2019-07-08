@@ -1,7 +1,7 @@
-package day49ForMybatisDiscriminator;
+package day49ForMybatisDiscriminator.nannvshipeiqi;
 
 
-public class AccDiscriminatorMan extends AccDiscriminator {
+public class AccDiscriminatorMan extends AccDiscriminator1 {
 	
 	private String prostate;
 

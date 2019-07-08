@@ -81,8 +81,8 @@ import day45ForMyvatisSource.service.impl.AccTableServiceImpl;
   
   4.使用懒加载，关联字段是多个字段的时候user_id的时候，采用association标签实现懒加载
   <!-- column="{id=user_id,name=order_name}" 中表示
-  id，name表示 调用的select的查询的参数值
-  user_id，order_name 表示调用的AccUserMapper xml中的查询的语句getOrderByPrimaryKey4 中的返回的字段值
+  id，name表示 调用的select的查询的参数值， #{name,jdbcType=VARCHAR}
+  user_id，order_name 表示调用的AccOrdersMapper xml中的数据库字段
    -->
   <resultMap id="getOrderMap4" type="day48ForMybatisLayzyLoad.AccOrders">
      <id column="id" property="id"/>

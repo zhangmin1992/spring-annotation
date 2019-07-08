@@ -1,6 +1,6 @@
-package day49ForMybatisDiscriminator;
+package day49ForMybatisDiscriminator.nannvshipeiqi;
 
-public class AccDiscriminatorWoman extends AccDiscriminator {
+public class AccDiscriminatorWoman extends AccDiscriminator1 {
 
 	private String womb;
 

@@ -52,15 +52,23 @@ public interface AccTable2Mapper {
      */
     int batchInsert2(ArrayList<AccTable2> lists);
     
+    /**
+     * 返回map的方式三
+     */
     List<Map<String,String>> groupByAndReturnMap();
-    
 
+    /**
+     * 返回map的方式一
+     */
     @MapKey("holiday_date")
     @Select("SELECT mm.holiday_date,mm.activity_name FROM acc_table2 mm\n" + 
     		"	WHERE 1=1\n" + 
     		"	group by mm.activity_name")
     Map<Date,Map<Date,String>> groupByAndReturnMap2();
     
+    /**
+     * 返回map的方式二，同样使用注解，返回结果不是map是实体了
+     */ 
     @MapKey("date")
     @Select("SELECT mm.holiday_date as date,mm.activity_name as name FROM acc_table2 mm\n" + 
     		"	WHERE 1=1\n" + 

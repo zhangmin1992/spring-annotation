@@ -38,15 +38,15 @@ import day45ForMyvatisSource.service.impl.AccTableServiceImpl;
  *  <foreach collection="list" item="acc" separator=",">
  *  
  *  功能点5：mapper中直接返回map，
- *  返回值是Map<Date,Map<Date,String>>，需要用@MapKey("holiday_date")注解指定谁是额外的那个key
- *  <select id="groupByAndReturnMap2" resultType="java.util.Map">
-  	SELECT mm.holiday_date,mm.activity_name FROM acc_table2 mm
-	WHERE 1=1
-	group by mm.activity_name
-  </select>
+ *  实现方式一：注解@MapKey
+ *  返回值是Map<Date,Map<Date,String>>，需要用@MapKey("holiday_date")注解指定谁是额外的那个key即可
+ *  方式二：使用注解，返回结果是map的实体
+ *  方式三：返回list<map>不推荐！
  *  同时需要map中获取date的key的时候，new date()是当前时间戳，是获取不到的，需要转化为指定日期格式的去查询
  *  DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Date dd1 =  sdf.parse("2019-05-07");
+	
+	功能点6：批量更新
  *  
  *  
  *  
@@ -65,8 +65,8 @@ public class App {
 		AccTable2Mapper accTable2Mapper = context.getBean(AccTable2Mapper.class);
 		
 		//3.调用，打印sql语句日志
-		//AccTable2 accTable = accTableService.getById(1);
-		//System.out.println(JSONObject.toJSONString(accTable));
+//		AccTable2 accTable = accTableService.getById(1);
+//		System.out.println(JSONObject.toJSONString(accTable));
 		
 		//4.插入返回主键
 		//AccTable2 accTable2 = new AccTable2(new Date(), "6666");
@@ -105,34 +105,36 @@ public class App {
 //		System.out.println("result="+ result);
 //		System.out.println("批量插入后返回主键列表是 " + JSONObject.toJSONString(list3));
 		
-		//10.分组然后返回map
+		//10.分组然后返回map，只推荐方式二，方式一获取map中的数据不方便，方式三返回list<map>不推荐，方式二获取数据好
+		//方式三：返回List<Map<String,String>>，map无法根据key获取不推荐！！
 //		List<Map<String,String>> map = accTable2Mapper.groupByAndReturnMap();
 //		System.out.println("是 " + JSONObject.toJSONString(map));
-		//方式一
+		//方式一注解，结果是Map<Date,Map<Date,String>>
 //		Map<Date,Map<Date,String>> map = accTable2Mapper.groupByAndReturnMap2();
 //		System.out.println("是 " + JSONObject.toJSONString(map));
 //		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date dd1 =  sdf.parse("2019-05-07");
+//		Date dd1 =  sdf.parse("2019-05-17");
 //		System.out.println(dd1.getTime());
+//		System.out.println(JSONObject.toJSONString(map.get(dd1)));
 //		System.out.println(map.get(dd1).get("activity_name"));
-		//方式二
+		//方式二注解，结果是多条map
 //		Map<Date,AccTableTemp> map = accTable2Mapper.groupByAndReturnMap3();
 //		System.out.println("是 " + JSONObject.toJSONString(map));
-//		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date dd1 =  sdf.parse("2019-05-07");
-//		System.out.println(dd1.getTime());
-//		System.out.println(map.get(dd1).getName());
+//		System.out.println(map.get("2019-05-17").getName());
 		
-//		List<AccTable2> lists = accTable2Mapper.selectByIds(new String[] {"10","71","77"});
-//		lists.get(0).setActivityName("112221name");
-//		lists.get(1).setActivityName("222222name");
-//		lists.get(2).setActivityName("3222233name");
-//		accTable2Mapper.batchUpdateByPrimaryKey(lists);
+		//批量更新
+		List<AccTable2> lists = accTable2Mapper.selectByIds(new String[] {"10","71","77"});
+		lists.get(0).setActivityName("112221name");
+		lists.get(1).setActivityName("222222name");
+		lists.get(2).setActivityName("3222233name");
+		accTable2Mapper.batchUpdateByPrimaryKey(lists);
+		List<AccTable2> lists2 = accTable2Mapper.selectByIds(new String[] {"10","71","77"});
+		System.out.println(JSONObject.toJSONString(lists2));
 		
-		AccTable2 accTable2 = accTable2Mapper.selectByChar("cccc");
-		System.out.println(JSONObject.toJSONString(accTable2));
-		System.out.println(accTable2.getActivityName2().equals("cccc"));
-		System.out.println(accTable2.getActivityName2().trim().equals("cccc"));
+//		AccTable2 accTable2 = accTable2Mapper.selectByChar("cccc");
+//		System.out.println(JSONObject.toJSONString(accTable2));
+//		System.out.println(accTable2.getActivityName2().equals("cccc"));
+//		System.out.println(accTable2.getActivityName2().trim().equals("cccc"));
 		context.close();
 	}
 }

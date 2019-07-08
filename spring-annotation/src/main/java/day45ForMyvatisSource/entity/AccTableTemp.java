@@ -2,9 +2,9 @@ package day45ForMyvatisSource.entity;
 
 public class AccTableTemp {
 
-    private String date;
+	private String date;
 
-    private String Name;
+	private String name;
 
 	public String getDate() {
 		return date;
@@ -14,12 +14,14 @@ public class AccTableTemp {
 		this.date = date;
 	}
 
+
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-    
+	
+
 }

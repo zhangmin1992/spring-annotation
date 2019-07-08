@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+	
+	<!-- 磁盘路径 -->
+	<diskStore path="/Users/min.zhang/workspace/jar" />
+	
+	<!-- copyOnRead 的含义是，判断从缓存中读取数据时是返回对象的引用还是复制 一个对象返
+		回。默认情况下是 false ，即返回数据的引用，这种情况下返回的都是相同的对象，和 MyBatis
+		默认缓存中的只读对象是相同的。如果设置为 true ，那就是可读写缓存，每次读取缓存时都
+		会复制一个新的实例  -->
+	<!-- 
+	   name:缓存名称。 
+       maxElementsInMemory：缓存最大个数。 
+       eternal:对象是否永久有效，一但设置了，timeout将不起作用。 
+       timeToIdleSeconds：设置对象在失效前的允许闲置时间（单位：秒）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。 
+       timeToLiveSeconds：设置对象在失效前允许存活时间（单位：秒）。最大时间介于创建时间和失效时间之间。仅当eternal=false对象不是永久有效时使用 
+       overflowToDisk：当内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中。 
+       diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。 
+       maxElementsOnDisk：硬盘最大缓存个数。 
+       diskPersistent：是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false. 
+       diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。 
+       memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。 
+       clearOnFlush：内存数量最大时是否清除。  -->
+	<defaultCache 
+		maxElementsInMemory="10"
+		maxElementsOnDisk="10000000" 
+		copyOnRead="true"
+		copyOnWrite="true"
+		eternal="false" 
+		overflowToDisk="true"
+		diskSpoolBufferSizeMB="10"
+		timeToIdleSeconds="120" 
+		timeToLiveSeconds="120"
+		diskExpiryThreadIntervalSeconds="120" 
+		memoryStoreEvictionPolicy="LRU">
+	</defaultCache>
+</ehcache>

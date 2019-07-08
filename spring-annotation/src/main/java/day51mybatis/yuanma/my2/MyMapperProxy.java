@@ -14,7 +14,8 @@ public class MyMapperProxy<T> implements InvocationHandler {
 		if(method.getDeclaringClass().getName().equals(AccTable2MapperXml.nameSpace)){
 			String sql = AccTable2MapperXml.methodSqlMapping.get(method.getName());
 			System.out.println(sql);
-		    return mySqlSession.selectOne(sql, args[0]);
+			return null;
+		    //return mySqlSession.selectOne(sql, args[0]);
 		}
 		return null;
 	}

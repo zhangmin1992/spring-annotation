@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *  数据库字段转化驼峰的对象处理工厂操作
- *  加Component注解！！！！
+ *  加Component注解！！！！，注入myObjectWrapperFactory的bean
  *  和xml这句话相互对应<property name="objectWrapperFactory" ref="myObjectWrapperFactory"></property>
 	* @Description: TODO(这里用一句话描述这个类的作用) 
 	* @author zhangmin 

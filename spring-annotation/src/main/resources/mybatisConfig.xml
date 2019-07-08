@@ -21,6 +21,8 @@
 	    <setting name="lazyLoadingEnabled" value="true"/>
 	    <!-- 当设置为‘true'的时候，懒加载的对象可能被任何懒属性全部加载。否则，每个属性都按需加载。 -->
 	    <setting name="aggressiveLazyLoading" value="false"/>
+	    <!-- 开启二级缓存，默认为开启的-->
+	    <setting name="cacheEnabled" value="true" />
 	</settings>
 	
 	<!-- 枚举类型的处理器 -->
@@ -42,13 +44,13 @@
 	</environments>
 	
 	<!-- 映射文件地址，需要一个个列举比较麻烦 -->
-	<mappers>
+	<!-- <mappers>
 		<mapper resource="mapper/AccTableMapper.xml" />
 		<mapper resource="mapper/AccTable2Mapper.xml" />
 		<mapper resource="mapper/AccLegalTableMapper.xml" />
 		<mapper resource="mapper/AccOrdersMapper.xml" />
 		<mapper resource="mapper/AccUserMapper.xml" />
-	</mappers>
+	</mappers> -->
 	<!-- 映射文件地址,企图这样，发现不可以-->
 	<!-- <mappers>
 		<package name="day46ForMybatisLog4jPrintSql.dao"/>

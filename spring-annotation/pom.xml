@@ -84,5 +84,17 @@
 		 	<artifactId>scala-library</artifactId>
 		 	<version>2.11.0</version>
 		 </dependency>
+		 
+		 <!-- day50:mybatis整合二级缓存部分 -->
+		 <dependency>
+		    <groupId>org.mybatis.caches</groupId>
+		    <artifactId>mybatis-ehcache</artifactId>
+		    <version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.caches</groupId> 
+			<artifactId>mybatis-redis</artifactId>
+			 <version>1.0.0-beta1</version>
+		</dependency>
   </dependencies>
 </project>

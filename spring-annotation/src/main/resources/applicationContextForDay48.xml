@@ -61,9 +61,8 @@
         		<property name="mapUnderscoreToCamelCase" value="true"></property>
         	</bean>
         </property> -->
-        
         <!-- 数据库返回值转化驼峰的方式三：适用于不写xml返回map对象,实体对象，加载了mybatis配置文件的时候-->
-        <property name="configLocation" value="classpath:mybatisConfig.xml"/>
+        <!-- <property name="configLocation" value="classpath:mybatisConfig.xml"/> -->
     </bean>
     
     <!--4 自动扫描对象关系映射 -->

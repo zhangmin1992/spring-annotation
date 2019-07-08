@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="day49ForMybatisDiscriminator.AccDiscriminatorMapper">
-  
-  <resultMap id="BaseResultMap" type="day49ForMybatisDiscriminator.AccDiscriminator">
+  <resultMap id="BaseResultMap" type="day49ForMybatisDiscriminator.entity.AccDiscriminator">
       <id column="id" property="id" />
       <result column="name" property="name"/>
-      <result column="type" property="type"/>
-      <!-- <result column="person_type" property="personType"/> -->
+      
+      <!-- 枚举写法一：适用于mybatis-config配置文件增加了适配器的情况，不需要修改任何的原生xml文件！！！ -->
+      <result column="person_type" property="personType"/>
+
+      <!-- 枚举写法二：
+       1.不引入mybatis配置文件，不需要删除mappers配置
+       2.修改xml的resultMap，添加typeHandler 和 javaType
+       3.修改更新接口的typeHandler
+       -->
+      <!-- <result 
+      column="person_type" 
+      property="personType" 
+      typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>-->
+      
+      <!-- <result 
+      column="person_type" 
+      jdbcType="INTEGER" 
+      property="personType"  
+      typeHandler="day49ForMybatisDiscriminator.zidingyi.DefaultEnumTypeHandler" /> -->
       
       <!-- mybatis 鉴别器 -->
-      <discriminator javaType="int" column="person_type">
+      <!-- <discriminator javaType="int" column="person_type">
 			<case value="0" resultMap="manResult"/>
 			<case value="1" resultMap="womanResult"/>
-	 </discriminator>
+	 </discriminator> -->
+	 
    </resultMap>
   
-   <resultMap id="manResult" type="day49ForMybatisDiscriminator.AccDiscriminatorMan">
+    <!-- <resultMap id="manResult" type="day49ForMybatisDiscriminator.AccDiscriminatorMan">
 		<result property="prostate" column="prostate" />
 	</resultMap>
 	<resultMap id="womanResult" type="day49ForMybatisDiscriminator.AccDiscriminatorWoman">
 		<result property="womb" column="womb"/>
-	</resultMap>
+	</resultMap> -->
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -28,5 +45,31 @@
     from acc_discriminator
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+   <update id="updateByPrimaryKeySelective" parameterType="day49ForMybatisDiscriminator.entity.AccDiscriminator">
+    update acc_discriminator
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="personType != null">
+        person_type = #{personType,jdbcType=INTEGER},
+      </if>
+      <!-- <if test="personType != null">
+        person_type = #{personType,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if> -->
+      <!-- <if test="personType != null">
+        person_type = #{personType,typeHandler=day49ForMybatisDiscriminator.zidingyi.DefaultEnumTypeHandler},
+      </if> -->
+      
+      <if test="prostate != null">
+        prostate = #{prostate,jdbcType=VARCHAR},
+      </if>
+      <if test="womb != null">
+        womb = #{womb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
   
 </mapper>

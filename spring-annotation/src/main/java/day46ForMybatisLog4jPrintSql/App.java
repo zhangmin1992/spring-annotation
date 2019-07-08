@@ -2,12 +2,7 @@ package day46ForMybatisLog4jPrintSql;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

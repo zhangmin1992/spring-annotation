@@ -20,6 +20,7 @@ public class CustomWrapper extends MapWrapper {
 	
     public String findProperty(String name, boolean useCamelCaseMapping) {
     	System.out.println("--"+name);
+    	//数据库的字段含有下划线才回去转驼峰
         if (name.indexOf("_") >= 0) {
             return underlineToCamelhump(name);
         }
@@ -33,17 +34,23 @@ public class CustomWrapper extends MapWrapper {
      * @return
      */
     public static String underlineToCamelhump(String inputString) {
-       
-    	StringBuilder sb = new StringBuilder();
+    	if(inputString == null || "".equals(inputString)) {
+        	return null;
+        }
+        //返回结果sb
+    	StringBuilder sb = new StringBuilder("");
         //下一个字符是否大写的标记
         boolean nextUpperCase = false;
+        //遍历字符串获取字符
         for (int i = 0; i < inputString.length(); i++) {
             char c = inputString.charAt(i);
             if (c == '_') {
+            	//对于___不做处理，直到找到下划线的第一个字符
                 if (sb.length() > 0) {
                     nextUpperCase = true;
                 }
             } else {
+            	//当前字符不是下划线，再判断是不是需要大写
                 if (nextUpperCase) {
                     sb.append(Character.toUpperCase(c));
                     nextUpperCase = false;
@@ -61,6 +68,10 @@ public class CustomWrapper extends MapWrapper {
     }
     
     public static void main(String[] args) {
+    	System.out.println(underlineToCamelhump(""));
+    	System.out.println(underlineToCamelhump(null));
+    	System.out.println(underlineToCamelhump("___"));
+    	System.out.println(underlineToCamelhump("__name_hh"));
     	System.out.println(underlineToCamelhump("my__name_hh"));
     }
 	
