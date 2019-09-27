@@ -11,4 +11,6 @@ public interface AccTableService {
 	int insert(AccTable2 record);
 	
 	AccTable2 selectByActivityName(String activityName,Integer id);
+	
+	void testTransation();
 }

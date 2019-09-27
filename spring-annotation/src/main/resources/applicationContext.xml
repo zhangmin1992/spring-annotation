@@ -37,11 +37,11 @@
         <!--驱动类名 -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <!-- url -->
-        <property name="url" value="jdbc:mysql://rm-2ze707l6b0440gg1pxo.mysql.rds.aliyuncs.com:3306/mercury_test_01?allowMultiQueries=true" />
+        <property name="url" value="jdbc:mysql://10.24.66.73:5002/maoyan_match?allowMultiQueries=true" />
         <!-- 用户名 -->
-        <property name="username" value="heimdallr" />
+        <property name="username" value="maoyan_match" />
         <!-- 密码 -->
-        <property name="password" value="7HGDeJLnH8a3" />
+        <property name="password" value="maoyan_match" />
     </bean>
     
     <!--3 会话工厂bean sqlSessionFactoryBean -->
