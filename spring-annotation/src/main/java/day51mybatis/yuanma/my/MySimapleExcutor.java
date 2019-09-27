@@ -13,7 +13,8 @@ public class MySimapleExcutor implements MyExcutor {
 	public <T> T query(String sql,Object param) {
 		try {
 			Connection connection = getConnection();
-			String formatSql = String.format(sql, Integer.parseInt(String.valueOf(param.toString())));
+			String formatSql = String.format(sql, Integer.parseInt(param.toString()));
+			System.out.println("MySimapleExcutor 执行的sql是 " + formatSql);
 			PreparedStatement pstmt = connection.prepareStatement(formatSql);
 			ResultSet resultSet = pstmt.executeQuery();
 			AccTable2 accTable2 = new AccTable2();
@@ -41,7 +42,6 @@ public class MySimapleExcutor implements MyExcutor {
 			Connection connection = DriverManager.getConnection(url, username, password);
 			return connection;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

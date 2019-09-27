@@ -14,7 +14,7 @@ public class AccTable2MapperXml {
 	/**
 	 * 设置final 是变量不可变
 	 */
-	public static final String nameSpace = "day51mybatis.yuanma.my.AccTable2Mapper";
+	public static final String nameSpace = "day51mybatis.yuanma.my2.AccTable2Mapper";
 	
 	public static final Map<String, String> methodSqlMapping = new HashMap<String, String>();
 	

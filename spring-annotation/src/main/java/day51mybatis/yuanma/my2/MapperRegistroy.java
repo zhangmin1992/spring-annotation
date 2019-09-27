@@ -6,20 +6,18 @@ import java.util.Map;
 import day51mybatis.yuanma.AccTable2;
 
 /**
- * 注册你的mapper
+ *   注册你的mapper
 	* @Description: TODO(这里用一句话描述这个类的作用) 
 	* @author zhangmin 
 	* @date Jul 1, 2019 11:31:03 AM
  */
 public class MapperRegistroy {
-
-	public static final String nameSpace = "day51mybatis.yuanma.my.AccTable2Mapper";
 	
 	public static final Map<String, MapperData> methodSqlMapping = new HashMap<String, MapperData>();
 	
-	MapperRegistroy() {
+	public MapperRegistroy() {
 		methodSqlMapping.put("selectByPrimaryKey", 
-				new MapperData("select * from acc_table2  where id = %d",AccTable2.class));
+				new MapperData("select * from acc_table2  where id = %d ",AccTable2.class));
 	}
 	
 	class MapperData<T> {

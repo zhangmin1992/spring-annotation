@@ -15,7 +15,9 @@ public class MyConfiguration {
 	}
 	
 	public void build() {
-		
+		if(scanPath == null || scanPath.length()<1) {
+			throw new RuntimeException("scanPath 必填非空");
+		}
 	}
 	
 	

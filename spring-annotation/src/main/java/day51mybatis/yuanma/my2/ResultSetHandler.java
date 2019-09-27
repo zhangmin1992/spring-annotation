@@ -7,7 +7,7 @@ import java.util.Date;
 import day51mybatis.yuanma.AccTable2;
 
 /**
- * 数据库操作和结果处理分发
+ *   数据库操作和结果处理分发
 	* @Description: TODO(这里用一句话描述这个类的作用) 
 	* @author zhangmin 
 	* @date Jul 1, 2019 11:46:23 AM

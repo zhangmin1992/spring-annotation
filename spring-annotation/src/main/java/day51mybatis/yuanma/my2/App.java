@@ -14,9 +14,9 @@ public class App {
 
 	public static void main(String[] args) throws IOException {
 		MyConfiguration configuration = new MyConfiguration();
-		configuration.setScanPath("day51mybatis.yuanma.my.AccTable2Mapper");
+		configuration.setScanPath("day51mybatis.yuanma.my2.AccTable2Mapper");
 		configuration.build();
-        MySqlSession sqlSession = new MySqlSession(configuration,null);
+        MySqlSession sqlSession = new MySqlSession(configuration,new MySimapleExcutor());
         AccTable2Mapper accTable2Mapper = sqlSession.getMapper(AccTable2Mapper.class);
         AccTable2 accTable2 = accTable2Mapper.selectByPrimaryKey(10);
         System.out.println(accTable2.getActivityName());

@@ -2,6 +2,8 @@ package day46ForMybatisLog4jPrintSql;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.alibaba.fastjson.JSONObject;
 
 import day46ForMybatisLog4jPrintSql.entity.AccTable;
+import day46ForMybatisLog4jPrintSql.entity.SaasServiceOrderInfo;
 
 
 /**
@@ -112,12 +115,18 @@ public class App {
 	     * mybatis 一级缓存，在一个sqlSession中，相同2次查询只会执行一次
 	     * accTable2 的值随着accTable赋值的改变而改变！！
 	     */
-	    AccTable accTable = sqlSession.selectOne("day46ForMybatisLog4jPrintSql.dao.AccTableMapper.selectByPrimaryKey", 20);
-        System.out.println(JSONObject.toJSONString(accTable));
-        
-        accTable.setActivityName("测试和我一样");
-        AccTable accTable2 = sqlSession.selectOne("day46ForMybatisLog4jPrintSql.dao.AccTableMapper.selectByPrimaryKey", 20);
-        System.out.println(JSONObject.toJSONString(accTable2));
+//	    AccTable accTable = sqlSession.selectOne("day46ForMybatisLog4jPrintSql.dao.AccTableMapper.selectByPrimaryKey", 20);
+//        System.out.println(JSONObject.toJSONString(accTable));
+//        
+//        accTable.setActivityName("测试和我一样");
+//        AccTable accTable2 = sqlSession.selectOne("day46ForMybatisLog4jPrintSql.dao.AccTableMapper.selectByPrimaryKey", 20);
+//        System.out.println(JSONObject.toJSONString(accTable2));
+          
+//          SaasServiceOrderInfo accTable = sqlSession.selectOne("day46ForMybatisLog4jPrintSql.dao.SaasServiceOrderInfoMapper.selectByPrimaryKey", 63812L);
+//          System.out.println(JSONObject.toJSONString(accTable));
+          
+          Map<Integer,SaasServiceOrderInfo> accTable = sqlSession.selectMap("day46ForMybatisLog4jPrintSql.dao.SaasServiceOrderInfoMapper.selectServiceOrderInfoV3", null);
+          System.out.println(JSONObject.toJSONString(accTable));
         
 		//4.修改操作没有这句话是不会入库的
 		sqlSession.commit();

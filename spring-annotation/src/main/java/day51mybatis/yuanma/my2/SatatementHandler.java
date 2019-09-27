@@ -23,7 +23,9 @@ public class SatatementHandler {
 		try {
 			Connection connection = getConnection();
 			String sql = mapperData.getKey(); 
+			System.out.println("SatatementHandler执行 " + sql);
 			String formatSql = String.format(sql, Integer.parseInt(String.valueOf(param.toString())));
+			System.out.println("SatatementHandler执行 " + formatSql);
 			PreparedStatement pstmt = connection.prepareStatement(formatSql);
 			return resultSetHandler.handleResultSets(pstmt, mapperData);
 		} catch (Exception e) {

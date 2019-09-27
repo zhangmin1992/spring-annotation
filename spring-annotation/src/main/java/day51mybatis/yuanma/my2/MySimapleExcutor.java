@@ -1,5 +1,11 @@
 package day51mybatis.yuanma.my2;
 
+/**
+ *   2.0版本的MySimapleExcutor注入了configuration，并传递给了SatatementHandler参数
+	* @Description: TODO(这里用一句话描述这个类的作用) 
+	* @author zhangmin 
+	* @date Jul 9, 2019 10:17:23 AM
+ */
 public class MySimapleExcutor implements MyExcutor {
 
 	private MyConfiguration configuration;
