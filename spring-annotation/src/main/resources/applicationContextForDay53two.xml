@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	
+	 <bean id="tairClient" class="day53ForTair.two.SimpleTairClientImpl">
+        <constructor-arg name="namespace" value="14" />
+        <constructor-arg name="localAppKey" value="com.sankuai.movie.maoyan.groupsettle" />
+        <constructor-arg name="remoteAppKey" value="com.sankuai.tair.qa.function" />
+    </bean>
+    
+	<!-- <bean id="bizImpl" class="day53ForTair.two.bizImpl">
+		<property name="simpleTairClientImpl" ref="tairClient"></property>
+	</bean> -->
+	
+	<bean id="bizImpl" class="day53ForTair.two.bizImpl">
+		<constructor-arg name="simpleTairClientImpl" ref="tairClient" />
+	</bean>
+	
+	
+</beans>

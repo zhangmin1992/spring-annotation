@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="mTairConfig" class="com.meituan.service.movie.tair.service.NewMTairConfig">
+        <property name="localAppKey" value="com.sankuai.movie.orderpay.gprice"/>
+        <property name="remoteAppKey" value="com.sankuai.tair.qa.function"/>
+        
+        <!-- 线上地址连接不上，会报错no mcc config -->
+        <!-- <property name="remoteAppKey" value="com.sankuai.tair.maoyan.public"/> -->
+    </bean>
+
+
+    <bean id="tairHelper" class="day53ForTair.one.TairHelper">
+        <property name="area" value="14"/>
+        <property name="mTairConfig" ref="mTairConfig"/>
+    </bean>
+
+</beans>

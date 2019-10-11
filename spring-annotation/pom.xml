@@ -111,5 +111,56 @@
 		            <version>${log4j.version}</version>
 		</dependency>
 		
+		<!-- day53tair组建依赖的包 -->
+		<dependency>
+            <groupId>com.taobao.tair</groupId>
+            <artifactId>tair3-client</artifactId>
+            <version>3.10.14</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.meituan.service.movie</groupId>
+            <artifactId>mtair-client</artifactId>
+            <version>1.1.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- day53tair组建方式二依赖的包 的附属包-->
+		<!-- <dependency>
+			<groupId>de.ruedigermoeller</groupId>
+			<artifactId>fst</artifactId>
+			<version>2.47</version>
+		</dependency> -->
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.6.RELEASE</version>
+        </dependency>
+        
+        <!-- 实体类中使用@data注解 -->
+		<dependency>
+		  <groupId>org.projectlombok</groupId>
+		  <artifactId>lombok</artifactId>
+		  <version>1.16.10</version>
+		</dependency>
+		
   </dependencies>
 </project>
