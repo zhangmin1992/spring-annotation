@@ -34,6 +34,7 @@ public class RedisCacheConfiguration {
 
     }
 }
+
 class nameClass {
     private String name;
     private Integer age;
